@@ -1,38 +1,231 @@
-.App {
-  text-align: center;
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Ubuntu', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+li{
+  list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.upload-image-lg{
+  width: 55%;
+  height: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
+/* .hidden{
+  opacity: 0;
+  visibility: visible;
+} */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+.section-upload{
   flex-direction: column;
+  padding: 50px 0;
+  min-height: 100vh;
+}
+
+.section-upload,
+.image-content{
+  display: flex;
   align-items: center;
+  gap: 20px;
+}
+
+.image-content{
+  flex: 1;
+}
+
+.upload-image-lg,
+.upload-image{
+  object-fit: contain;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.upload-image{
+  width: 80px;
+  height: 65px;
+}
+
+.image-list{
+  width: 40%;
+}
+
+.image-item{
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15%;
+  margin:8px 0;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+  border-radius: 6px;
+}
+
+.image-name{
+  font-size: 18px;
+}
+
+.input-choose{
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 13px;
+}
+.image-size{
+  font-size: 13px;
+}
+
+.btn-remove{
+  cursor: pointer;
+  width: 30px;
+  border: 0;
+  background: 0;
+}
+
+.btn-remove:active{
+  transform: scale(.6);
+  transition: .4s ease-in-out;
+}
+
+.btn-remove:hover{
+  animation: ring .8s ease-in-out;
+}
+
+.btn-remove:not(:hover) {
+  animation: unset;
+}
+
+.image-item,
+.btn-remove,
+.image-name,
+.upload-image,
+.image-size{
+  animation: upload .8s ease-in-out;
+}
+
+/* modal */
+.modal{
+  padding: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  background: #fff;
+  border-radius: 5px;
+  transition: all 5s ease-in-out;
+  animation: modal 1s ease-in-out;
+}
+
+.modal-title{
+  padding: 10px 0;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  gap: 8px;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-group{
+  float: right;
 }
 
-@keyframes App-logo-spin {
+.btn{
+  margin: 0 3px;
+  padding: 2px 3px;
+  cursor: pointer;
+  font-weight: 400;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: #000000d9;
+}
+
+.btn-yes{
+  background: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.btn-no{
+  background: #fff;
+  border-color: #d9d9d9;
+}
+
+.modal-notification-image{
+  width: 20px;
+  height: 20px;
+}
+/* notification */
+.notification{
+  position: absolute;
+  right: 0;
+  background: #40a9ff;
+  /* width: 0; */
+  /* opacity: 0; */
+  padding: 20px 10px;
+  font-size: 12px;
+}
+
+@keyframes upload {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(10px);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    top: 45%;
+    left: 50%;
+  }
+
+  to {
+    opacity: 1;
+    top: 40%;
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+
+  10% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+
+  20% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+
+  30% {
+    transform: rotate(-25deg) scale(1) skew(1deg)
+  }
+
+  40% {
+    transform: rotate(25deg) scale(1) skew(1deg)
+  }
+
+  50% {
+    transform: rotate(0) scale(1) skew(1deg)
+  }
+
+  100% {
+    transform: rotate(0) scale(1) skew(1deg)
   }
 }
