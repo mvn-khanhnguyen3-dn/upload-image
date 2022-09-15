@@ -9,6 +9,13 @@ li{
   list-style: none;
 }
 
+.btn-change-layout{
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  border-radius: 15px;
+}
+
 .upload-image-lg{
   width: 55%;
   height: 75%;
@@ -17,10 +24,6 @@ li{
   left: 50%;
   transform: translate(-50%,-50%);
 }
-/* .hidden{
-  opacity: 0;
-  visibility: visible;
-} */
 
 .section-upload{
   flex-direction: column;
@@ -33,22 +36,29 @@ li{
   display: flex;
   align-items: center;
   gap: 20px;
+  flex: 1;
 }
 
 .image-content{
-  flex: 1;
+  position: relative;
 }
 
 .upload-image-lg,
 .upload-image{
-  object-fit: contain;
+  object-fit: cover;
   overflow: hidden;
   border-radius: 6px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .upload-image{
-  width: 80px;
+  width: 85px;
   height: 65px;
+  cursor: pointer;
+}
+
+.upload-image:hover{
+  transition: all .8s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .image-list{
@@ -60,7 +70,7 @@ li{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15%;
+  gap: 50px;
   margin:8px 0;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
   border-radius: 6px;
@@ -117,9 +127,9 @@ li{
   padding: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   left: 50%;
-  top: 40%;
+  top: 50%;
   transform: translate(-50%,-50%);
-  position: absolute;
+  position: fixed;
   background: #fff;
   border-radius: 5px;
   transition: all 5s ease-in-out;
@@ -164,15 +174,114 @@ li{
   width: 20px;
   height: 20px;
 }
-/* notification */
-.notification{
+
+.show-image{
+  width: 50%;
+  max-height: 100%;
+}
+
+.modal-name{
+  padding-bottom: 5px;
+}
+
+.btn-close{
   position: absolute;
-  right: 0;
-  background: #40a9ff;
-  /* width: 0; */
-  /* opacity: 0; */
-  padding: 20px 10px;
-  font-size: 12px;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+}
+
+.image-show{
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: center;
+  position: relative;
+}
+
+/* drag-drop */
+.drop-file-input,
+.item-remove{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-file-input {
+  position: relative;
+  width: 30%;
+  height: 200px;
+  border: 2px dashed #ddd;
+  border-radius: 20px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.drop-file-input input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.drop-file-input:hover,
+.drop-file-input.dragover {
+  opacity: 0.6;
+}
+
+.drop-file-input__label {
+  text-align: center;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.drop-file-input__label img {
+  width: 100px;
+}
+
+.drop-file-preview_item{
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-remove {
+  transition: opacity 0.3s ease;
+}
+
+.drop-file-preview__item:hover .item-remove {
+  opacity: 1;
+}
+
+.action-remove{
+  animation: slideOut 1s ease-in-out;
+  position: relative;
+}
+
+@keyframes slideOut {
+  0% {
+    left: 0;
+  }
+
+  75% {
+    left: 2000px;
+    max-height: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-width: 1px;
+    overflow: hidden;
+  }
+
+  100% {
+    left: 2000px;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+  }
 }
 
 @keyframes upload {
@@ -190,13 +299,13 @@ li{
 @keyframes modal {
   from {
     opacity: 0;
-    top: 45%;
+    top: 55%;
     left: 50%;
   }
 
   to {
     opacity: 1;
-    top: 40%;
+    top: 50%;
   }
 }
 
@@ -227,5 +336,14 @@ li{
 
   100% {
     transform: rotate(0) scale(1) skew(1deg)
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .image-list{
+    width: 60%;
+  }
+  .image-item{
+    gap: 10px;
   }
 }

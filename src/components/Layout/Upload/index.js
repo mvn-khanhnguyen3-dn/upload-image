@@ -1,37 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Modal from "../../Modules/Modal";
-import trash from "./trash.svg";
+import ShowImage from "../../Modules/ImageDetail";
+import useHook from "../../../hooks/useHook";
+import ImageItem from "../../Modules/ImageItem";
 
 const Upload = () => {
-  const [images, setImages] = useState([]);
   const [isShow, setIsShow] = useState(false);
-  const [id, setId] = useState(0);
-  let sectionRef = useRef();
-  let listRef = useRef();
+  const [isShowBtn, setIsShowBtn] = useState(false);
+  const [item, setItem] = useState();
+  const [index, setIndex] = useState();
 
-  useEffect(() => {
-    return () => {
-      images && URL.revokeObjectURL(images);
-    };
-  }, [images]);
+  const {
+    images,
+    listRef,
+    sectionRef,
+    handleChangeImage,
+    handleRemove,
+    handleShow,
+    handleRemoveAll,
+  } = useHook();
 
-  const handleChangeImage = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      images.push({
-        fileInput: e.target.files[i],
-        id: Math.random(i * 123456).toFixed(3),
-      });
-    }
-    setImages([...images]);
-  };
-
-  const handleShow = (id) => {
-    setId(id);
+  const handleShowImage = (item) => {
+    handleShow();
+    setItem(item);
     setIsShow(!isShow);
-    sectionRef.current.style.background = "#00000073";
-    listRef.current.style.opacity = "0.6";
   };
 
+  const handleBtnRemove = (item, index) => {
+    handleShow();
+    setItem(item);
+    setIndex(index);
+    setIsShowBtn(!isShowBtn);
+  };
   return (
     <section ref={sectionRef} className="section-upload">
       <h3 className="upload-title">Upload Images</h3>
@@ -45,39 +45,53 @@ const Upload = () => {
         style={{ display: "none" }}
         onClick={(e) => (e.target.value = null)}
       />
-      <label className="input-choose" htmlFor="input-selected">
+
+      <label
+        style={{ pointerEvents: !isShowBtn ? "unset" : "none" }}
+        className="input-choose"
+        htmlFor="input-selected"
+      >
         Upload
       </label>
       {images && (
         <ul ref={listRef} className="image-list">
-          {images?.map((item) => (
-            <li key={item.id} className="image-item">
-              <div className="image-content">
-                <img
-                  className="upload-image"
-                  src={URL.createObjectURL(item.fileInput)}
-                  alt={item.fileInput.name}
-                />
-                <h5 className="image-name">{item.fileInput.name}</h5>
-              </div>
-              <span className="image-size">{`${Math.round(
-                item.fileInput.size
-              )}MB`}</span>
-              <img
-                className="btn-remove"
-                onClick={() => handleShow(item.id)}
-                src={trash}
-                alt="trash"
-              />
-            </li>
+          {images?.map((item, index) => (
+            <ImageItem
+              key={index}
+              item={item}
+              index={index}
+              handleShowImage={handleShowImage}
+              handleBtnRemove={handleBtnRemove}
+            />
           ))}
         </ul>
       )}
-      {isShow && (
+      {images.length > 1 && (
+        <button
+          style={{
+            pointerEvents: isShowBtn || isShow ? "none" : "unset",
+            opacity: isShowBtn || isShow ? ".6" : "unset",
+          }}
+          onClick={handleRemoveAll}
+          className="btn btn-remove-all"
+        >
+          Remove All
+        </button>
+      )}
+
+      {isShowBtn && (
         <Modal
-          id={id}
-          images={images}
-          setImages={setImages}
+          item={item}
+          index={index}
+          sectionRef={sectionRef}
+          listRef={listRef}
+          setIsShowBtn={setIsShowBtn}
+          handleRemove={handleRemove}
+        />
+      )}
+      {isShow && (
+        <ShowImage
+          item={item}
           sectionRef={sectionRef}
           listRef={listRef}
           setIsShow={setIsShow}

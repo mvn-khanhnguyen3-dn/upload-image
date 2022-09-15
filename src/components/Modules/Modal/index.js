@@ -1,18 +1,14 @@
-import React from "react";
 import notification from "./notification.svg";
 
 const Modal = (props) => {
-  const { sectionRef, listRef, setIsShow, images, id, setImages } = props;
+  const { index, sectionRef, listRef, setIsShowBtn, item, handleRemove } =
+    props;
 
   const showModal = () => {
     sectionRef.current.style.background = "unset";
+    listRef.current.style.pointerEvents = "unset";
     listRef.current.style.opacity = "1";
-    setIsShow(false);
-  };
-
-  const handleRemove = () => {
-    const newData = images.filter((item) => item.id !== id);
-    setImages(newData);
+    setIsShowBtn(false);
   };
 
   return (
@@ -32,8 +28,8 @@ const Modal = (props) => {
           </button>
           <button
             onClick={() => {
+              handleRemove(item, index);
               showModal();
-              handleRemove();
             }}
             className="btn btn-yes"
           >
