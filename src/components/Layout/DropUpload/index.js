@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import uploadImg from "./upload-clound.png";
 import useHook from "../../../hooks/useHook";
-import ShowImage from "../../Modules/ImageDetail";
+import ImageDetail from "../../Modules/ImageDetail";
 import ImageItem from "../../Modules/ImageItem";
 
 const DropUpload = () => {
@@ -26,6 +26,7 @@ const DropUpload = () => {
     handleRemove,
     handleShow,
     handleRemoveAll,
+    showModal,
   } = useHook();
 
   const handleShowImage = (item) => {
@@ -52,6 +53,7 @@ const DropUpload = () => {
             type="file"
             accept="image/*"
             multiple
+            value=""
             onChange={handleChangeImage}
             onClick={(e) => (e.target.value = null)}
           />
@@ -78,16 +80,18 @@ const DropUpload = () => {
             onClick={handleRemoveAll}
             className="btn btn-remove-all"
           >
-            Remove All
+            <div id="translate"></div>
+            <span>Remove All</span>
           </button>
         )}
       </div>
       {isShow && (
-        <ShowImage
+        <ImageDetail
           item={item}
-          sectionRef={sectionRef}
-          listRef={listRef}
+          setItem={setItem}
           setIsShow={setIsShow}
+          showModal={showModal}
+          images={images}
         />
       )}
     </>

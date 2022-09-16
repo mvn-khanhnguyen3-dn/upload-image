@@ -1,7 +1,7 @@
-import "./App.css";
+import { useState } from "react";
 import Upload from "./components/Layout/Upload";
 import DropUpload from "./components/Layout/DropUpload";
-import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [isLayout, setIsLayout] = useState(false);
@@ -13,10 +13,10 @@ function App() {
   return (
     <>
       <button
-        className="btn btn-change-layout"
+        className="btn btn-change-layout btn-white btn-animate"
         onClick={() => handleShowLayout()}
       >
-        Change Layout : {isLayout ? "List Image" : "DragDrop"}
+        {isLayout ? "List Image" : "DragDrop"}
       </button>
       {isLayout ? <Upload /> : <DropUpload />}
     </>

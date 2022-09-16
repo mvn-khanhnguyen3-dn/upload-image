@@ -1,21 +1,23 @@
-import React from "react";
+import SlideImage from "../SlideImage";
 import close from "./close.svg";
 
 const ImageDetail = (props) => {
-  const { item, sectionRef, listRef, setIsShow } = props;
+  const { item, setIsShow, images, showModal, setItem } = props;
 
-  const showModal = () => {
-    sectionRef.current.style.background = "unset";
-    listRef.current.style.pointerEvents = "unset";
-    listRef.current.style.opacity = "1";
+  const openModal = () => {
+    showModal();
     setIsShow(false);
   };
+
   return (
-    <div className="modal show-image">
-      <h3 className="modal-name">{item.name}</h3>
-      <img className="image-show" src={URL.createObjectURL(item)} alt="" />
-      <img src={close} onClick={showModal} className="btn btn-close" alt="" />
-    </div>
+    <>
+      <div className="modal show-image">
+        <h3 className="modal-name">{item.name}</h3>
+        <img className="image-show" src={URL.createObjectURL(item)} alt="" />
+        <img src={close} onClick={openModal} className="btn btn-close" alt="" />
+      </div>
+      <SlideImage images={images} setItem={setItem} />
+    </>
   );
 };
 

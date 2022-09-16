@@ -30,10 +30,12 @@ const useHook = () => {
     };
   };
 
-  const handleRemoveAll = () => {
+  const handleRemoveAll = (e) => {
     listRef.current.classList.add("action");
     const timeId = setTimeout(() => {
       setImages([]);
+      e.target.files = null;
+      e.target.value = null;
     }, 300);
     return () => {
       window.clearTimeout(timeId);

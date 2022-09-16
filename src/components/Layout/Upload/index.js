@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Modal from "../../Modules/Modal";
-import ShowImage from "../../Modules/ImageDetail";
 import useHook from "../../../hooks/useHook";
 import ImageItem from "../../Modules/ImageItem";
+import ImageDetail from "../../Modules/ImageDetail";
+import TextUpload from "../../Modules/TextUpload";
 
 const Upload = () => {
   const [isShow, setIsShow] = useState(false);
@@ -18,6 +19,7 @@ const Upload = () => {
     handleRemove,
     handleShow,
     handleRemoveAll,
+    showModal,
   } = useHook();
 
   const handleShowImage = (item) => {
@@ -34,7 +36,7 @@ const Upload = () => {
   };
   return (
     <section ref={sectionRef} className="section-upload">
-      <h3 className="upload-title">Upload Images</h3>
+      <TextUpload />
       <input
         type="file"
         id="input-selected"
@@ -45,7 +47,6 @@ const Upload = () => {
         style={{ display: "none" }}
         onClick={(e) => (e.target.value = null)}
       />
-
       <label
         style={{ pointerEvents: !isShowBtn ? "unset" : "none" }}
         className="input-choose"
@@ -69,16 +70,16 @@ const Upload = () => {
       {images.length > 1 && (
         <button
           style={{
-            pointerEvents: isShowBtn || isShow ? "none" : "unset",
-            opacity: isShowBtn || isShow ? ".6" : "unset",
+            pointerEvents: isShowBtn ? "none" : "unset",
+            opacity: isShowBtn ? ".6" : "unset",
           }}
           onClick={handleRemoveAll}
           className="btn btn-remove-all"
         >
-          Remove All
+          <div id="translate"></div>
+          <span>Remove All</span>
         </button>
       )}
-
       {isShowBtn && (
         <Modal
           item={item}
@@ -90,10 +91,11 @@ const Upload = () => {
         />
       )}
       {isShow && (
-        <ShowImage
+        <ImageDetail
+          images={images}
           item={item}
-          sectionRef={sectionRef}
-          listRef={listRef}
+          setItem={setItem}
+          showModal={showModal}
           setIsShow={setIsShow}
         />
       )}
