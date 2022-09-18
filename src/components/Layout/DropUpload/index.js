@@ -62,7 +62,7 @@ const DropUpload = () => {
           <ul ref={listRef} className="drop-file-preview image-list">
             {images.map((item, index) => (
               <ImageItem
-                key={index}
+                key={item.id}
                 item={item}
                 index={index}
                 handleShowImage={handleShowImage}
@@ -75,7 +75,7 @@ const DropUpload = () => {
           <button
             style={{
               pointerEvents: isShow ? "none" : "unset",
-              opacity: isShow ? ".6" : "unset",
+              opacity: isShow ? "0" : "unset",
             }}
             onClick={handleRemoveAll}
             className="btn btn-remove-all"

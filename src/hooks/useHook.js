@@ -13,16 +13,21 @@ const useHook = () => {
   }, [images]);
 
   const handleChangeImage = (e) => {
-    setImages([...images, ...e.target.files]);
+    for (let i = 0; i < e.target.files.length; i++) {
+      images.push({
+        id: images.length + 1,
+        data: e.target.files[i],
+      });
+    }
+    setImages([...images]);
   };
 
   const handleRemove = (file, index) => {
     const actionItems = document.querySelectorAll(".image-item");
     actionItems[index].classList.add("action-remove");
-    const updatedList = [...images];
-    updatedList.splice(images.indexOf(file), 1);
+    const newData = images.filter((image) => image.id !== file);
     const timeId = setTimeout(() => {
-      setImages(updatedList);
+      setImages(newData);
       actionItems[index].classList.remove("action-remove");
     }, 800);
     return () => {
@@ -30,16 +35,9 @@ const useHook = () => {
     };
   };
 
-  const handleRemoveAll = (e) => {
+  const handleRemoveAll = () => {
     listRef.current.classList.add("action");
-    const timeId = setTimeout(() => {
-      setImages([]);
-      e.target.files = null;
-      e.target.value = null;
-    }, 300);
-    return () => {
-      window.clearTimeout(timeId);
-    };
+    setImages([]);
   };
 
   const handleShow = () => {

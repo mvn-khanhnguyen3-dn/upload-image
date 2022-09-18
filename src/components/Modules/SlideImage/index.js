@@ -11,13 +11,13 @@ const SlideImage = ({ images, setItem }) => {
   };
   return (
     <ul className="slide-list modal">
-      {images.map((item, index) => (
-        <li key={index} className="slide-item">
+      {images.map((item) => (
+        <li key={item.id} className="slide-item">
           <img
             className="image-show slide-item_image"
-            src={URL.createObjectURL(item)}
-            alt=""
-            onClick={() => handleChangeImage(item)}
+            src={URL.createObjectURL(item.data)}
+            alt={item.data.name}
+            onClick={() => handleChangeImage(item.data)}
           />
         </li>
       ))}

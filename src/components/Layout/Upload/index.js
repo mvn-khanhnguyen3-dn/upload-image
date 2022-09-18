@@ -58,7 +58,7 @@ const Upload = () => {
         <ul ref={listRef} className="image-list">
           {images?.map((item, index) => (
             <ImageItem
-              key={index}
+              key={item.id}
               item={item}
               index={index}
               handleShowImage={handleShowImage}
@@ -71,7 +71,7 @@ const Upload = () => {
         <button
           style={{
             pointerEvents: isShowBtn ? "none" : "unset",
-            opacity: isShowBtn ? ".6" : "unset",
+            opacity: isShowBtn ? "0" : "unset",
           }}
           onClick={handleRemoveAll}
           className="btn btn-remove-all"

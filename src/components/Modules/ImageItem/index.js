@@ -8,23 +8,23 @@ const ImageItem = (props) => {
       <div className="image-content">
         <img
           className="upload-image"
-          src={URL.createObjectURL(item)}
-          alt={item.name}
-          onClick={() => handleShowImage(item)}
+          src={URL.createObjectURL(item.data)}
+          alt={item.data.name}
+          onClick={() => handleShowImage(item.data)}
         />
         <h5 className="image-name">
-          {item.name.length > 35
-            ? item.name?.substring(0, 10) +
+          {item.data.name.length > 35
+            ? item.data.name?.substring(0, 10) +
               "..." +
-              item.name?.substring(40, item.name.length)
-            : item.name}
+              item.data.name?.substring(40, item.data.name.length)
+            : item.data.name}
         </h5>
       </div>
-      <span className="image-size">{`${Math.round(item.size)}KB`}</span>
+      <span className="image-size">{`${Math.round(item.data.size)}KB`}</span>
       <img
         className="btn-remove"
         onClick={() => {
-          handleBtnRemove(item, index);
+          handleBtnRemove(item.id, index);
         }}
         src={trash}
         alt="trash"
