@@ -9,6 +9,10 @@ li{
   list-style: none;
 }
 
+.image-progress{
+  position: relative;
+}
+
 .upload-image-lg{
   width: 55%;
   height: 75%;
@@ -424,6 +428,51 @@ li{
 
 .btn-remove-all:hover #translate {
   left: 0;
+}
+
+/* progress */
+
+.myProgress {
+  width: 100%;
+  background-color: #ddd;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  animation: widthProgress 1s ease-in-out;
+  opacity: 0;
+}
+
+.myBar {
+  width: 1%;
+  animation: widthBar 1s ease-in-out;
+  height: 8px;
+  background-color: #04AA6D;
+  opacity: 0;
+}
+
+@keyframes widthBar {
+  0% {
+    width: 1%;
+    opacity: 1;
+  }
+
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes widthProgress {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
 }
 
 @keyframes ringBtn {
