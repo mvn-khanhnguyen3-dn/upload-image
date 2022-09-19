@@ -222,6 +222,7 @@ li{
 .slide-item{
   width: 75px;
   height: 65px;
+  position: relative;
 }
 
 .slide-item_image{
@@ -442,26 +443,7 @@ li{
   transform: translate(-50%,-50%);
   animation: widthProgress 1s ease-in-out;
   opacity: 0;
-}
-
-.myBar {
-  width: 1%;
-  animation: widthBar 1s ease-in-out;
-  height: 8px;
-  background-color: #04AA6D;
-  opacity: 0;
-}
-
-@keyframes widthBar {
-  0% {
-    width: 1%;
-    opacity: 1;
-  }
-
-  100% {
-    width: 100%;
-    opacity: 0;
-  }
+  height: 100%;
 }
 
 @keyframes widthProgress {
@@ -600,6 +582,17 @@ li{
 @media screen and (max-width: 1200px){
   .image-list{
     width: 60%;
+  }
+  .image-item{
+    gap: 10px;
+  }
+  .drop-file-input {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 1024px){
+  .image-list{
+    width: 70%;
   }
   .image-item{
     gap: 10px;

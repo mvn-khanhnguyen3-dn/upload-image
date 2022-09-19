@@ -18,9 +18,9 @@ const ImageItem = (props) => {
         </div>
         <h5 className="image-name">
           {item.data.name.length > 35
-            ? item.data.name?.substring(0, 10) +
+            ? item.data.name.substring(0, 10) +
               "..." +
-              item.data.name?.substring(40, item.data.name.length)
+              item.data.name.substring(40, item.data.name.length)
             : item.data.name}
         </h5>
       </div>

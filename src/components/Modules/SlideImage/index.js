@@ -1,6 +1,5 @@
 import React from "react";
 import ProgressBar from "../ProgressBar";
-
 const SlideImage = ({ images, setItem }) => {
   const handleChangeImage = (image) => {
     const modalImage = document.querySelector(".show-image");

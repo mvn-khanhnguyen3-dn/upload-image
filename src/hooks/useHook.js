@@ -24,11 +24,11 @@ const useHook = () => {
 
   const handleRemove = (file, index) => {
     const actionItems = document.querySelectorAll(".image-item");
-    actionItems[index].classList.add("action-remove");
+    actionItems[index]?.classList.add("action-remove");
     const newData = images.filter((image) => image.id !== file);
     const timeId = setTimeout(() => {
       setImages(newData);
-      actionItems[index].classList.remove("action-remove");
+      actionItems[index]?.classList.remove("action-remove");
     }, 800);
     return () => {
       window.clearTimeout(timeId);

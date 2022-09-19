@@ -56,6 +56,7 @@ const DropUpload = () => {
             value=""
             onChange={handleChangeImage}
             onClick={(e) => (e.target.value = null)}
+            style={{ pointerEvents: !isShow ? "unset" : "none" }}
           />
         </div>
         {images && (
