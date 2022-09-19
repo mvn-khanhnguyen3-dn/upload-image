@@ -1,7 +1,9 @@
-import { useState } from "react";
-import Upload from "./components/Layout/Upload";
-import DropUpload from "./components/Layout/DropUpload";
+import { useState, Suspense, lazy } from "react";
 import "./App.css";
+import Loading from "./components/Modules/Loading";
+
+const Upload = lazy(() => import("./components/Layout/Upload"));
+const DropUpload = lazy(() => import("./components/Layout/DropUpload"));
 
 function App() {
   const [isLayout, setIsLayout] = useState(false);
@@ -11,7 +13,7 @@ function App() {
   };
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <button
         className="btn btn-change-layout btn-white btn-animate"
         onClick={() => handleShowLayout()}
@@ -19,7 +21,7 @@ function App() {
         {isLayout ? "List Image" : "DragDrop"}
       </button>
       {isLayout ? <Upload /> : <DropUpload />}
-    </>
+    </Suspense>
   );
 }
 

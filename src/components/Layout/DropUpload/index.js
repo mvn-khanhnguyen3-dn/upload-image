@@ -3,6 +3,7 @@ import uploadImg from "./upload-clound.png";
 import useHook from "../../../hooks/useHook";
 import ImageDetail from "../../Modules/ImageDetail";
 import ImageItem from "../../Modules/ImageItem";
+import Loading from "../../Modules/Loading";
 
 const DropUpload = () => {
   const wrapperRef = useRef(null);
@@ -22,6 +23,7 @@ const DropUpload = () => {
     images,
     listRef,
     sectionRef,
+    isPending,
     handleChangeImage,
     handleRemove,
     handleShow,
@@ -34,6 +36,8 @@ const DropUpload = () => {
     setItem(item);
     setIsShow(!isShow);
   };
+
+  console.log(images);
 
   return (
     <>
@@ -61,15 +65,19 @@ const DropUpload = () => {
         </div>
         {images && (
           <ul ref={listRef} className="drop-file-preview image-list">
-            {images.map((item, index) => (
-              <ImageItem
-                key={item.id}
-                item={item}
-                index={index}
-                handleShowImage={handleShowImage}
-                handleBtnRemove={handleRemove}
-              />
-            ))}
+            {isPending ? (
+              <Loading />
+            ) : (
+              images.map((item, index) => (
+                <ImageItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  handleShowImage={handleShowImage}
+                  handleBtnRemove={handleRemove}
+                />
+              ))
+            )}
           </ul>
         )}
         {images.length > 1 && (

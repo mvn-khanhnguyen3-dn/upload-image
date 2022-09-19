@@ -3,6 +3,7 @@ import Modal from "../../Modules/Modal";
 import useHook from "../../../hooks/useHook";
 import ImageItem from "../../Modules/ImageItem";
 import ImageDetail from "../../Modules/ImageDetail";
+import Loading from "../../Modules/Loading";
 import TextUpload from "../../Modules/TextUpload";
 
 const Upload = () => {
@@ -15,6 +16,7 @@ const Upload = () => {
     images,
     listRef,
     sectionRef,
+    isPending,
     handleChangeImage,
     handleRemove,
     handleShow,
@@ -34,6 +36,7 @@ const Upload = () => {
     setIndex(index);
     setIsShowBtn(!isShowBtn);
   };
+
   return (
     <section ref={sectionRef} className="section-upload">
       <TextUpload />
@@ -56,22 +59,26 @@ const Upload = () => {
       </label>
       {images && (
         <ul ref={listRef} className="image-list">
-          {images?.map((item, index) => (
-            <ImageItem
-              key={item.id}
-              item={item}
-              index={index}
-              handleShowImage={handleShowImage}
-              handleBtnRemove={handleBtnRemove}
-            />
-          ))}
+          {isPending ? (
+            <Loading />
+          ) : (
+            images?.map((item, index) => (
+              <ImageItem
+                key={item.id}
+                item={item}
+                index={index}
+                handleShowImage={handleShowImage}
+                handleBtnRemove={handleBtnRemove}
+              />
+            ))
+          )}
         </ul>
       )}
       {images.length > 1 && (
         <button
           style={{
-            pointerEvents: isShowBtn ? "none" : "unset",
-            opacity: isShowBtn ? "0" : "unset",
+            pointerEvents: isShow || isShowBtn ? "none" : "unset",
+            display: isShow || isShowBtn ? "none" : "unset",
           }}
           onClick={handleRemoveAll}
           className="btn btn-remove-all"

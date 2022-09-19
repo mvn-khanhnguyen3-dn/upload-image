@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useTransition } from "react";
 
 const useHook = () => {
   const [images, setImages] = useState([]);
+  const [isPending, startTransition] = useTransition(false);
 
   let sectionRef = useRef();
   let listRef = useRef();
@@ -13,13 +14,15 @@ const useHook = () => {
   }, [images]);
 
   const handleChangeImage = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      images.push({
-        id: Math.random().toString(36).substr(2, 5),
-        data: e.target.files[i],
-      });
-    }
-    setImages([...images]);
+    startTransition(() => {
+      for (let i = 0; i < e.target.files.length; i++) {
+        images.push({
+          id: Math.random().toString(36).substr(2, 5),
+          data: e.target.files[i],
+        });
+      }
+      setImages([...images]);
+    });
   };
 
   const handleRemove = (file, index) => {
@@ -36,7 +39,6 @@ const useHook = () => {
   };
 
   const handleRemoveAll = () => {
-    listRef.current.classList.add("action");
     setImages([]);
   };
 
@@ -62,6 +64,7 @@ const useHook = () => {
     images,
     sectionRef,
     listRef,
+    isPending,
   };
 };
 

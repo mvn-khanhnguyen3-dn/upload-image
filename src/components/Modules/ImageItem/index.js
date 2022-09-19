@@ -3,6 +3,7 @@ import trash from "./trash.svg";
 
 const ImageItem = (props) => {
   const { index, item, handleShowImage, handleBtnRemove } = props;
+  console.log(item);
 
   return (
     <li className="image-item">
