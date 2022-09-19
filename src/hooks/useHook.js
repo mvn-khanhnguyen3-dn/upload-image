@@ -15,7 +15,7 @@ const useHook = () => {
   const handleChangeImage = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       images.push({
-        id: images.length + 1,
+        id: Math.random().toString(36).substr(2, 5),
         data: e.target.files[i],
       });
     }

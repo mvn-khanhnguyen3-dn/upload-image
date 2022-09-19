@@ -214,13 +214,14 @@ li{
   gap: 10px;
   background:#00000073;
   top: 86%;
-  width:50%;
+  min-width:50%;
+  max-width: 90%;
   animation: fade 1s ease-in-out;
 }
 
 .slide-item{
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 65px;
 }
 
 .slide-item_image{
@@ -526,20 +527,18 @@ li{
 
   75% {
     left: 2000px;
-    max-height: 10rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-width: 1px;
     overflow: hidden;
   }
 
   100% {
     left: 2000px;
-    max-height: 0;
     padding-top: 0;
     padding-bottom: 0;
     border-width: 0;
-    overflow: hidden;
+    overflow: hidden; 
   }
 }
 

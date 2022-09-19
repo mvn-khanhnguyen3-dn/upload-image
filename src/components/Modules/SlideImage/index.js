@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "../ProgressBar";
 
 const SlideImage = ({ images, setItem }) => {
   const handleChangeImage = (image) => {
@@ -12,13 +13,14 @@ const SlideImage = ({ images, setItem }) => {
   return (
     <ul className="slide-list modal">
       {images.map((item) => (
-        <li key={item.id} className="slide-item">
+        <li key={item.id} className="slide-item image-progress">
           <img
             className="image-show slide-item_image"
             src={URL.createObjectURL(item.data)}
             alt={item.data.name}
             onClick={() => handleChangeImage(item.data)}
           />
+          <ProgressBar />
         </li>
       ))}
     </ul>
